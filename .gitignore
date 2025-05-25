@@ -1,1 +1,6 @@
 .env
+# 仮想環境の除外
+venv/
+# Pythonキャッシュファイルを無視
+__pycache__/
+*.py[cod]
