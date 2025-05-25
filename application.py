@@ -1,4 +1,10 @@
-from watcher.watcher import start_watch
+# application.py の例（watcherを起動）
+import subprocess
+import sys
+import os
 
-if __name__ == "__main__":
-    start_watch()
+
+
+# ファイル監視などを続けて実行
+from watcher import watcher
+watcher.start()

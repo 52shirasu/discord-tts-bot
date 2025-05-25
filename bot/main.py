@@ -90,7 +90,7 @@ async def on_message(message):
         vc = message.guild.voice_client
         await speak_text(message.content, vc)
 
-# ...既存コード...
+
 
 @bot.event
 async def on_voice_state_update(member, before, after):
@@ -108,7 +108,10 @@ async def on_voice_state_update(member, before, after):
                 await voice_client.disconnect()
                 await send_to_read_channel(member.guild, "👋 誰もいなくなったのでVCから退出しました")
 
-# ...既存コード...
 
 
-bot.run(TOKEN)
+def start_bot():
+    bot.run(TOKEN)
+
+if __name__ == "__main__":
+    start_bot()
