@@ -90,5 +90,25 @@ async def on_message(message):
         vc = message.guild.voice_client
         await speak_text(message.content, vc)
 
+# ...既存コード...
+
+@bot.event
+async def on_voice_state_update(member, before, after):
+    # BOT自身は無視
+    if member.bot:
+        return
+
+    # ユーザーがVCから退出したとき
+    if before.channel is not None and (after.channel is None or before.channel != after.channel):
+        voice_client = member.guild.voice_client
+        if voice_client and voice_client.channel == before.channel:
+            # 残っているのがBOTだけなら退出
+            non_bot_members = [m for m in before.channel.members if not m.bot]
+            if len(non_bot_members) == 0:
+                await voice_client.disconnect()
+                await send_to_read_channel(member.guild, "👋 誰もいなくなったのでVCから退出しました")
+
+# ...既存コード...
+
 
 bot.run(TOKEN)
